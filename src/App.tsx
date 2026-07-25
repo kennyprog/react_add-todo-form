@@ -6,33 +6,36 @@ import { useState } from 'react';
 import { TodoList } from './components/TodoList/TodoList';
 import React from 'react';
 
-type User = {
-  id: number,
-  name: string,
-  username: string,
-  email: string,
-}
+export type User = {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+};
 
-type Todo = {
-  id: number,
-  title: string,
-  completed: boolean,
-  userId: number,
-}
+export type Todo = {
+  id: number;
+  title: string;
+  completed: boolean;
+  userId: number;
+  user?: User
+};
 
 const prepareTodos = (todosArray: Array<Todo>, usersArray: Array<User>) => {
   return todosArray.map(todo => {
-    const foundUser = usersArray.find(user => user.id === todo.userId)
+    const foundUser = usersArray.find(user => user.id === todo.userId);
 
     return {
       ...todo,
-      user: foundUser
+      user: foundUser,
     };
-  })
+  });
 };
 
 export const App = () => {
-  const [todos, setTodos] = useState(() => prepareTodos(todosFromServer, usersFromServer));
+  const [todos, setTodos] = useState(() =>
+    prepareTodos(todosFromServer, usersFromServer),
+  );
 
   const [handleUserError, setHandleUserError] = useState(false);
   const [handleTitleError, setHandleTitleError] = useState(false);
@@ -57,9 +60,8 @@ export const App = () => {
       return;
     }
 
-    const maxId = todos.length > 0
-      ? Math.max(...todos.map(todo => todo.id))
-      : 0;
+    const maxId =
+      todos.length > 0 ? Math.max(...todos.map(todo => todo.id)) : 0;
 
     const targetUser = usersFromServer.find(user => user.id === userId);
 
@@ -68,7 +70,7 @@ export const App = () => {
       title: title.trim(),
       completed: false,
       userId: userId,
-      user: targetUser
+      user: targetUser,
     };
 
     setTodos(prev => [newTodo, ...prev]);
@@ -87,12 +89,15 @@ export const App = () => {
             type="text"
             data-cy="titleInput"
             value={title}
+            placeholder="Enter todo title"
             onChange={event => {
               setTitle(event.target.value);
               setHandleTitleError(false);
             }}
           />
-          {handleTitleError && <span className="error">Please enter a title</span>}
+          {handleTitleError && (
+            <span className="error">Please enter a title</span>
+          )}
         </div>
 
         <div className="field">
@@ -114,7 +119,9 @@ export const App = () => {
             ))}
           </select>
 
-          {handleUserError && <span className="error">Please choose a user</span>}
+          {handleUserError && (
+            <span className="error">Please choose a user</span>
+          )}
         </div>
 
         <button type="submit" data-cy="submitButton">
@@ -122,7 +129,7 @@ export const App = () => {
         </button>
       </form>
 
-      <TodoList todos={todos} />
+      {todos && <TodoList todos={todos} />}
     </div>
   );
 };

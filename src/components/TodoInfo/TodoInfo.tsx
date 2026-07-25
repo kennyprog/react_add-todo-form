@@ -1,10 +1,15 @@
-import React from "react";
-import { UserInfo } from "../UserInfo";
+import React from 'react';
+import { UserInfo } from '../UserInfo';
+import { Todo, User } from '../../App';
 
-export const TodoInfo = ({ todo }) => {
+type P = {
+  todo: Todo
+}
+
+export const TodoInfo: React.FC<P> = ({ todo }) => (
   <article data-id={todo.id} className="TodoInfo TodoInfo--completed">
     <h2 className="TodoInfo__title">{todo.title}</h2>
 
-    <UserInfo user={todo.user} />
+    {todo.user && <UserInfo user={todo.user} />}
   </article>
-};
+);
