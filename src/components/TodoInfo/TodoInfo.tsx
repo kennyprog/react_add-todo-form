@@ -1,13 +1,13 @@
 import React from 'react';
 import { UserInfo } from '../UserInfo';
-import { Todo, User } from '../../App';
+import { Todo } from '../../App';
 
 type P = {
-  todo: Todo
-}
+  todo: Todo;
+};
 
 export const TodoInfo: React.FC<P> = ({ todo }) => (
-  <article data-id={todo.id} className="TodoInfo TodoInfo--completed">
+  <article data-id={todo.id} className={`TodoInfo ${todo.completed ? 'TodoInfo--completed' : ''}`}>
     <h2 className="TodoInfo__title">{todo.title}</h2>
 
     {todo.user && <UserInfo user={todo.user} />}
