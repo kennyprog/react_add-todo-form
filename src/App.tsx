@@ -73,7 +73,7 @@ export const App = () => {
       user: targetUser,
     };
 
-    setTodos(prev => [newTodo, ...prev]);
+    setTodos(prev => [...prev, newTodo]);
 
     setTitle('');
     setUserId(0);

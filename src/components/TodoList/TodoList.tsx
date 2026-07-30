@@ -1,18 +1,10 @@
 import React from 'react';
-import { UserInfo } from '../UserInfo';
-import { User } from '../../App';
+import { Todo } from '../../App';
 import { TodoInfo } from '../TodoInfo';
 
-type Todos = {
-  id: number;
-  title: string;
-  completed: boolean;
-  userId: number;
-  user?: User;
-};
 
 type P = {
-  todos: Todos[];
+  todos: Todo[];
 };
 
 export const TodoList: React.FC<P> = ({ todos }) => {
