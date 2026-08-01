@@ -1,4 +1,4 @@
-import { User } from "../../App";
+import { User } from '../../App';
 
 type UserInfoProps = {
   user?: User;

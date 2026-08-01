@@ -2,7 +2,6 @@ import React from 'react';
 import { Todo } from '../../App';
 import { TodoInfo } from '../TodoInfo';
 
-
 type P = {
   todos: Todo[];
 };
